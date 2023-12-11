@@ -145,20 +145,38 @@ int main(){
 //	table(num,1);
 	//end of task 5
 	
-//	int sum=0;
-//	int row,col;
-//	array1(matrix1);
-//	array2(matrix2);
-//	cout<<"First matrix: \n";
-//	array1display(matrix1);
-//	cout<<"Second matrix: \n";
-//	array2display(matrix2);
-//	for (int i=0;i<3;i++){
-//		for int(j=0;j<3;j++){
-//			for (int k=1;k<3;k++){
-//				
-//			}
-//		}
-//	}
+	float adjoint[3][3],inverse[3][3];
+	array1(matrix1);
+	cout<<"First matrix: \n";
+	array1display(matrix1);
+	float determinant = matrix1[0][0] * (matrix1[1][1] * matrix1[2][2] - matrix1[2][1] * matrix1[1][2]) -
+						matrix1[0][1] * (matrix1[1][0] * matrix1[2][2] - matrix1[2][0] * matrix1[1][2]) +
+						matrix1[0][2] * (matrix1[1][0] * matrix1[2][1] - matrix1[2][0] * matrix1[1][1]);
+	if (determinant == 0) {
+	cout << "The matrix is singular, it\'s inverse does not exist." << endl;
+	}
+	else{
+		for(int i=0; i<3; i++){
+			for(int j=0; j<3; j++){
+				adjoint[i][j] = (matrix1[(j+1)%3][(i+1)%3] * matrix1[(j+2)%3][(i+2)%3] -
+				matrix1[(j+1)%3][(i+2)%3] * matrix1[(j+2)%3][(i+1)%3]);
+			}
+		}
 	
+
+	for (int i = 0; i < 3; ++i){
+		for (int j = 0; j < 3; ++j){
+			inverse[i][j] = adjoint[i][j] / determinant;
+		}
+	}
+	cout << "The inverse of the matrix is:" << endl;
+	for (int i=0; i<3; i++) {
+		for (int j=0; j<3; j++){
+			cout << inverse[i][j] << " ";
+		}
+		cout << endl;
+	} 
+
+}
+//		end of home task
 }
